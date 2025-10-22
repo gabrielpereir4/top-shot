@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddxhp18sjt3aj"]
+
+[ext_resource type="Script" path="res://scripts/entities/Target.cs" id="1_81iiv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mih0h"]
+size = Vector2(40, 40)
+
+[node name="Target" type="Area2D"]
+script = ExtResource("1_81iiv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_mih0h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0, 1)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhjfarw3uyuwa"]
+
+[ext_resource type="Script" path="res://scripts/loadout/weapon/Rifle.cs" id="1_a10tf"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_a10tf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 20.0
+offset_top = -4.0
+offset_right = 52.0
+offset_bottom = 4.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(52, 0)

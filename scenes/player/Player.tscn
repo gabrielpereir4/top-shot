@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://diumxq65wp4u5"]
+
+[ext_resource type="PackedScene" uid="uid://dtw1ax4jlrbdc" path="res://scenes/character/Character.tscn" id="1_oos5p"]
+[ext_resource type="Script" path="res://scripts/character/player/Player.cs" id="2_1nf5u"]
+
+[node name="Player" instance=ExtResource("1_oos5p")]
+script = ExtResource("2_1nf5u")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 0)
+
+[node name="ColorRect" parent="." index="1"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
