@@ -12,23 +12,16 @@ public partial class Player : Character
 
 	public override void _PhysicsProcess(double delta)
 	{
-		var movingHorizontally = Input.IsActionPressed("ui_left") || Input.IsActionPressed("ui_right");
-		var movingVertically = Input.IsActionPressed("ui_up") || Input.IsActionPressed("ui_down");
 
-		if (!movingHorizontally && !movingVertically)
-		{
-			if (Input.IsActionPressed("lean_left"))
-				lean = LeanDirection.Left;
-			else if (Input.IsActionPressed("lean_right"))
-				lean = LeanDirection.Right;
-			else
-				lean = LeanDirection.None;
-		}
-		else
-		{
+		if (Input.IsActionPressed("lean_left")){
+			lean = LeanDirection.Left;
+		} else if (Input.IsActionPressed("lean_right")) {
+			lean = LeanDirection.Right;
+		} else {
 			lean = LeanDirection.None;
 		}
-		
+		ApplyLean();
+
 		Vector2 input = new(
 			Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left"),
 			Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up")
@@ -39,7 +32,6 @@ public partial class Player : Character
 
 		this.Move(input);
 	}
-	
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)

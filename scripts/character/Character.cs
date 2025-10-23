@@ -3,9 +3,10 @@ using System;
 
 public partial class Character : CharacterBody2D
 {
+	// Lean control
 	public enum LeanDirection { None, Left, Right }
 	protected LeanDirection lean = LeanDirection.None;
-	private Vector2 basePosition;
+	protected LeanDirection previousLean = LeanDirection.None;
 	private Vector2 leanOffsetLeft = new Vector2(0, -6);
 	private Vector2 leanOffsetRight = new Vector2(0, 6);
 
@@ -19,7 +20,6 @@ public partial class Character : CharacterBody2D
 
 	public override void _Ready()
 	{
-		basePosition = GlobalPosition;
 		Health = MaxHealth;
 	}
 
@@ -42,22 +42,36 @@ public partial class Character : CharacterBody2D
 		QueueFree();
 	}
 	
+
+
 	protected void ApplyLean()
 	{
-		GD.Print("leaning");
-		var sprite = GetNode<ColorRect>("ColorRect");
-
+		if (lean == previousLean)
+			return;
+			
+		// If we got here, lean state has changed
+		switch (previousLean)
+		// Erases previous lean offset
+		{
+			case LeanDirection.Left:
+				GlobalPosition -= leanOffsetLeft.Rotated(Rotation);
+				break;
+			case LeanDirection.Right:
+				GlobalPosition -= leanOffsetRight.Rotated(Rotation);
+				break;
+		}
+	
+		// Applies new lean offset (if necessary)
 		switch (lean)
 		{
 			case LeanDirection.Left:
-				GlobalPosition = basePosition + leanOffsetLeft.Rotated(Rotation);
+				GlobalPosition += leanOffsetLeft.Rotated(Rotation);
 				break;
 			case LeanDirection.Right:
-				GlobalPosition = basePosition + leanOffsetRight.Rotated(Rotation);
-				break;
-			default:
-				GlobalPosition = basePosition;
+				GlobalPosition += leanOffsetRight.Rotated(Rotation);
 				break;
 		}
+
+		previousLean = lean;
 	}
 }
