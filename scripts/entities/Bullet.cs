@@ -23,6 +23,15 @@ public partial class Bullet : Area2D
 			despawn_bullet();
 		}
 	}
+	
+	private void OnBodyEntered(Node body)
+	{
+		if (body.IsInGroup("Enemy")) 
+		{
+			body.CallDeferred("TakeDamage", _damage);
+			despawn_bullet();
+		}
+	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -35,6 +44,7 @@ public partial class Bullet : Area2D
 		var tex = ImageTexture.CreateFromImage(img);
 		sprite.Texture = tex;
 		AreaEntered += OnAreaEntered;
+		BodyEntered += OnBodyEntered;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

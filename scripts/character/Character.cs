@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+/**
+* Implements basic Dynamic Character physics and attributes (health, movement, leaning)
+*/
 public partial class Character : CharacterBody2D
 {
 	// Lean control
