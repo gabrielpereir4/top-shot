@@ -1,5 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt2s87yxgcinw"]
+[gd_scene load_steps=3 format=3 uid="uid://bt2s87yxgcinw"]
 
 [ext_resource type="PackedScene" uid="uid://dtw1ax4jlrbdc" path="res://scenes/character/Character.tscn" id="1_ep6tt"]
+[ext_resource type="Script" path="res://scripts/character/ai/enemy/Enemy.cs" id="2_pbhgm"]
 
-[node name="Character" instance=ExtResource("1_ep6tt")]
+[node name="Enemy" instance=ExtResource("1_ep6tt")]
+script = ExtResource("2_pbhgm")
+Fov = 60.0
+VisionLength = 200.0
+FacingOffsetDegrees = -90.0
+
+[node name="ColorRect" parent="." index="1"]
+color = Color(0.929412, 0.462745, 0.0509804, 1)
